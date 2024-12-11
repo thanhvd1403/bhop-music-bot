@@ -17,27 +17,27 @@ function createQueueButtons() {
 
 function createPlayingButtons() {
   const actionbutton = new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId("np-delete").setStyle(4).setLabel("🗑️"),
-    new ButtonBuilder().setCustomId("np-back").setStyle(4).setLabel("⏮️"),
+    new ButtonBuilder().setCustomId("np-back").setStyle(2).setLabel("⏮️"),
     new ButtonBuilder()
       .setCustomId("np-pauseresume")
-      .setStyle(1)
+      .setStyle(2)
       .setLabel("⏯️"),
-    new ButtonBuilder().setCustomId("np-skip").setStyle(1).setLabel("⏭️"),
+    new ButtonBuilder().setCustomId("np-skip").setStyle(2).setLabel("⏭️"),
     new ButtonBuilder()
       .setCustomId("np-clear")
-      .setStyle(1)
+      .setStyle(2)
       .setLabel("🧹 Clear Queue")
   );
 
   const actionbutton2 = new ActionRowBuilder().addComponents(
     new ButtonBuilder()
       .setCustomId("np-volumeadjust")
-      .setStyle(1)
+      .setStyle(2)
       .setLabel("🔊"),
-    new ButtonBuilder().setCustomId("np-loop").setStyle(1).setLabel("🔂"),
-    new ButtonBuilder().setCustomId("np-shuffle").setStyle(1).setLabel("🔀"),
-    new ButtonBuilder().setCustomId("np-stop").setStyle(1).setLabel("🛑")
+    new ButtonBuilder().setCustomId("np-loop").setStyle(2).setLabel("🔂"),
+    new ButtonBuilder().setCustomId("np-shuffle").setStyle(2).setLabel("🔀"),
+    new ButtonBuilder().setCustomId("np-stop").setStyle(2).setLabel("🛑"),
+    new ButtonBuilder().setCustomId("np-delete").setStyle(1).setLabel("🗑️")
   );
 
   return [actionbutton, actionbutton2];

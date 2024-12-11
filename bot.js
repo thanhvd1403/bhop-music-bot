@@ -42,8 +42,9 @@
 
   const player = new Player(botClient);
   const oauthTokens = getOauthTokens;
+  console.log("Oauth Tokens: ", oauthTokens);
   await player.extractors.register(YoutubeiExtractor, {
-    authentication: oauthTokens,
+    authentication: undefined,
   });
 
   await player.extractors.loadDefault(

@@ -1,5 +1,5 @@
 const { EmbedBuilder, time } = require("discord.js");
-const EMBED_COLOR = "#303030";
+const EMBED_COLOR = "#505050";
 
 function getUserTag(user) {
   if (!user || typeof user !== "object") {

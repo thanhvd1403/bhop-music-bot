@@ -16,12 +16,12 @@ const createEmbed = (clientUser, track, progressBar) => {
   const npEmbed = new EmbedBuilder()
     .setAuthor({ name: clientUser.tag, iconURL: clientUser.displayAvatarURL() })
     .setThumbnail(track.thumbnail)
-    .setColor("#FF0000")
+    .setColor("#505050")
     .setTitle("Starting next song... Now Playing 🎵")
     .setDescription(
       `${track.title}${
         track.queryType !== "arbitrary" ? ` ([Link](${track.url}))` : ""
-      }\n${progressBar}`
+      }\n*Length: ${track.duration}*`
     )
     .setTimestamp();
 
@@ -38,17 +38,17 @@ const createEmbed = (clientUser, track, progressBar) => {
 
 const createComponents = () => [
   new ActionRowBuilder().addComponents(
-    createButton("np-delete", 4, "🗑️"),
-    createButton("np-back", 1, "⏮️ Previous"),
-    createButton("np-pauseresume", 1, "⏯️ Play/Pause"),
-    createButton("np-skip", 1, "⏭️ Skip"),
-    createButton("np-clear", 1, "🧹 Clear Queue")
+    createButton("np-back", 2, "⏮️"),
+    createButton("np-pauseresume", 2, "⏯️"),
+    createButton("np-skip", 2, "⏭️"),
+    createButton("np-clear", 2, "🧹 Clear Queue")
   ),
   new ActionRowBuilder().addComponents(
-    createButton("np-volumeadjust", 1, "🔊 Adjust Volume"),
-    createButton("np-loop", 1, "🔂 Loop Once"),
-    createButton("np-shuffle", 1, "🔀 Shuffle Queue"),
-    createButton("np-stop", 1, "🛑 Stop Queue")
+    createButton("np-volumeadjust", 2, "🔊"),
+    createButton("np-loop", 2, "🔂"),
+    createButton("np-shuffle", 2, "🔀"),
+    createButton("np-stop", 2, "🛑"),
+    createButton("np-delete", 1, "🗑️")
   ),
 ];
 
