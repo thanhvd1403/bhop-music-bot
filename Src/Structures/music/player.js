@@ -1,4 +1,4 @@
-const { useMainPlayer } = require('discord-player');
+const { useMainPlayer } = require("discord-player");
 
 const player = useMainPlayer();
 

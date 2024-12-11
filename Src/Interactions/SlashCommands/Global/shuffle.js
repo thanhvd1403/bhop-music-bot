@@ -1,23 +1,23 @@
-const { 
+const {
   validation: { validateVoiceChannel, isPlaying },
   player: { player },
   embeds: { createShuffleEmbed },
-} = require('../../../Structures/music');
+} = require("../../../Structures/music");
 
 module.exports = {
-  name: 'shuffle',
+  name: "shuffle",
   type: 1,
-  description: 'Shuffles the tracks in the queue.',
+  description: "Shuffles the tracks in the queue.",
   guildCooldown: 1000,
   run: async (client, interaction) => {
     try {
       await interaction.deferReply();
       const queue = player.nodes.get(interaction.guild.id);
-      if (!await validateVoiceChannel(interaction)) return;
-      if (!await isPlaying(queue, interaction)) return;
+      if (!(await validateVoiceChannel(interaction))) return;
+      if (!(await isPlaying(queue, interaction))) return;
 
       const shuffleembed = createShuffleEmbed(interaction);
-      
+
       queue.tracks.shuffle();
       interaction.followUp({ embeds: [shuffleembed] });
     } catch (err) {

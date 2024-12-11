@@ -1,13 +1,16 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = async (client, message, command) => {
-  if (!command.onlyRoles || !Array.isArray(command.onlyRoles || !message.guild)) return true;
+  if (!command.onlyRoles || !Array.isArray(command.onlyRoles || !message.guild))
+    return true;
   const member = message.member;
-  if (command.onlyRoles.some(roleId => member.roles.cache.has(roleId))) return true;
+  if (command.onlyRoles.some((roleId) => member.roles.cache.has(roleId)))
+    return true;
   else {
-    if (command.returnErrors == false || command.returnOnlyRolesError == false) return false;
+    if (command.returnErrors == false || command.returnOnlyRolesError == false)
+      return false;
     const errorEmbed = new EmbedBuilder()
-      .setColor('DarkRed')
+      .setColor("DarkRed")
       .setTimestamp()
       .setAuthor({
         name: member.user.tag,
@@ -16,8 +19,8 @@ module.exports = async (client, message, command) => {
       .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
       .setDescription(
         `The command you tried to execute couldn't be executed as you are missing one of these required roles:\n${command.onlyRoles
-          .map(roleId => `↳ <@&${roleId}>`)
-          .join('\n')}`,
+          .map((roleId) => `↳ <@&${roleId}>`)
+          .join("\n")}`
       );
 
     message.reply({

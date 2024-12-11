@@ -1,24 +1,28 @@
 module.exports = {
-  name: 'reload',
+  name: "reload",
   type: 1,
-  description: 'Reloads a command.',
+  description: "Reloads a command.",
   guildCooldown: 1000,
   ownerOnly: true,
   options: [
     {
-      name: 'command',
-      description: 'The command to reload.',
+      name: "command",
+      description: "The command to reload.",
       type: 3,
       required: true,
     },
   ],
   run: async (client, interaction) => {
     try {
-      const commandName = interaction.options.getString('command', true).toLowerCase();
+      const commandName = interaction.options
+        .getString("command", true)
+        .toLowerCase();
       const command = client.slashCommands.get(commandName);
 
       if (!command) {
-        return interaction.reply(`There is no command with name \`${commandName}\`!`);
+        return interaction.reply(
+          `There is no command with name \`${commandName}\`!`
+        );
       }
 
       delete require.cache[require.resolve(`${__dirname}/${command.name}.js`)];
@@ -29,7 +33,7 @@ module.exports = {
       await interaction.reply(`Command \`${newCommand.name}\` was reloaded!`);
     } catch (error) {
       await interaction.reply(
-        `There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``,
+        `There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``
       );
     }
   },

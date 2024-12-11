@@ -1,5 +1,5 @@
-const fs = require('node:fs');
-const path = require('node:path');
+const fs = require("node:fs");
+const path = require("node:path");
 
 module.exports = function readFiles(dir, filesList = []) {
   try {
@@ -7,7 +7,7 @@ module.exports = function readFiles(dir, filesList = []) {
 
     const files = fs.readdirSync(dir);
 
-    files.forEach(file => {
+    files.forEach((file) => {
       const filePath = path.join(dir, file);
       if (fs.statSync(filePath).isDirectory()) {
         readFiles(filePath, filesList); // Recursively read directories

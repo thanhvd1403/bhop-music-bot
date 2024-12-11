@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'ping',
+  name: "ping",
   type: 1,
-  description: 'Pong',
+  description: "Pong",
   guildCooldown: 1000,
   run: async (client, interaction) => {
     interaction.reply({

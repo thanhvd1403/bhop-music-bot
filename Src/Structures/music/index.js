@@ -1,8 +1,8 @@
-const player = require('./player');
-const embeds = require('./embeds');
-const buttons = require('./buttons');
-const validation = require('./validation');
-const autocomplete = require('./autocomplete');
+const player = require("./player");
+const embeds = require("./embeds");
+const buttons = require("./buttons");
+const validation = require("./validation");
+const autocomplete = require("./autocomplete");
 
 module.exports = {
   player: {
@@ -35,5 +35,5 @@ module.exports = {
   autocomplete: {
     buildAutocompleteResponse: autocomplete.buildAutocompleteResponse,
     handleAutocomplete: autocomplete.handleAutocomplete,
-  }
+  },
 };

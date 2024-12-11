@@ -1,24 +1,27 @@
-const { 
+const {
   validation: { validateVoiceChannel, isPlaying },
   player: { player },
   embeds: { createSkipEmbed },
-} = require('../../../Structures/music');
+} = require("../../../Structures/music");
 
 module.exports = {
-  name: 'skip',
+  name: "skip",
   type: 1,
-  description: 'Skips the current song.',
+  description: "Skips the current song.",
   guildCooldown: 1000,
   run: async (client, interaction) => {
     try {
       await interaction.deferReply();
       const queue = player.nodes.get(interaction.guild.id);
-      if (!await validateVoiceChannel(interaction)) return;
-      if (!await isPlaying(queue, interaction)) return;
+      if (!(await validateVoiceChannel(interaction))) return;
+      if (!(await isPlaying(queue, interaction))) return;
 
       const queuedTracks = queue.tracks.toArray();
       if (!queuedTracks[0])
-        return interaction.followUp({ content: `❌ | There is no music is currently in the queue!`, ephemeral: true });
+        return interaction.followUp({
+          content: `❌ | There is no music is currently in the queue!`,
+          ephemeral: true,
+        });
 
       const skipembed = createSkipEmbed(queue, queuedTracks, interaction);
 

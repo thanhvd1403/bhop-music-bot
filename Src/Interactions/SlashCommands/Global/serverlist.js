@@ -1,9 +1,9 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
-  name: 'serverlist',
+  name: "serverlist",
   type: 1,
-  description: 'Shows the server list.',
+  description: "Shows the server list.",
   ownerOnly: true,
   guildCooldown: 1000,
   ignore: true,
@@ -16,26 +16,28 @@ module.exports = {
       `${client.guilds.cache.size}\n\n` +
       client.guilds.cache
         .sort((a, b) => b.memberCount - a.memberCount)
-        .map(r => r)
+        .map((r) => r)
         .map((r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount}`)
         .slice(0, 10)
-        .join('\n');
+        .join("\n");
 
     const embed = new EmbedBuilder()
-      .setColor('#FF0000')
+      .setColor("#FF0000")
       .setTitle(`${page}/${Math.ceil(client.guilds.cache.size / 10)}`)
       .setDescription(description);
 
     const msg = await interaction.channel.send({ embeds: [embed] });
 
-    await msg.react('⬅');
-    await msg.react('➡');
-    await msg.react('❌');
+    await msg.react("⬅");
+    await msg.react("➡");
+    await msg.react("❌");
 
-    const collector = msg.createReactionCollector((reaction, user) => user.id === interaction.author.id);
+    const collector = msg.createReactionCollector(
+      (reaction, user) => user.id === interaction.author.id
+    );
 
-    collector.on('collect', async reaction => {
-      if (reaction._emoji.name === '⬅') {
+    collector.on("collect", async (reaction) => {
+      if (reaction._emoji.name === "⬅") {
         // Updates variables
         i0 = i0 - 10;
         i1 = i1 - 10;
@@ -53,19 +55,21 @@ module.exports = {
           `${client.guilds.cache.size}\n\n` +
           client.guilds.cache
             .sort((a, b) => b.memberCount - a.memberCount)
-            .map(r => r)
+            .map((r) => r)
             .map((r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount}`)
             .slice(i0, i1)
-            .join('\n');
+            .join("\n");
 
         // Update the embed with new informations
-        embed.setTitle(`${page}/${Math.round(client.guilds.cache.size / 10)}`).setDescription(description);
+        embed
+          .setTitle(`${page}/${Math.round(client.guilds.cache.size / 10)}`)
+          .setDescription(description);
 
         // Edit the message
         msg.edit({ embeds: [embed] });
       }
 
-      if (reaction._emoji.name === '➡') {
+      if (reaction._emoji.name === "➡") {
         // Updates variables
         i0 = i0 + 10;
         i1 = i1 + 10;
@@ -83,19 +87,21 @@ module.exports = {
           `${client.guilds.cache.size}\n\n` +
           client.guilds.cache
             .sort((a, b) => b.memberCount - a.memberCount)
-            .map(r => r)
+            .map((r) => r)
             .map((r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount}`)
             .slice(i0, i1)
-            .join('\n');
+            .join("\n");
 
         // Update the embed with new informations
-        embed.setTitle(`${page}/${Math.round(client.guilds.cache.size / 10)}`).setDescription(description);
+        embed
+          .setTitle(`${page}/${Math.round(client.guilds.cache.size / 10)}`)
+          .setDescription(description);
 
         // Edit the message
         msg.edit({ embeds: [embed] });
       }
 
-      if (reaction._emoji.name === '❌') {
+      if (reaction._emoji.name === "❌") {
         return msg.delete();
       }
 

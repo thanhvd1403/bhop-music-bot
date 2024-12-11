@@ -5,4 +5,4 @@ guildCooldownDB.sqlite
 globalCooldownDB.sqlite
 channelCooldownDB.sqlite
 .prettierrc
-Src/Credentials/
+Config.js

@@ -1,17 +1,17 @@
-const { 
+const {
   validation: { validateVoiceChannel, isPlaying },
   player: { player },
   embeds: { createClearEmbed },
-} = require('../../Structures/music');
+} = require("../../Structures/music");
 
 module.exports = {
-  name: 'np-clear',
+  name: "np-clear",
   run: async (client, interaction) => {
     try {
       await interaction.deferReply();
       const queue = player.nodes.get(interaction.guild.id);
-      if (!await validateVoiceChannel(interaction)) return;
-      if (!await isPlaying(queue, interaction)) return;
+      if (!(await validateVoiceChannel(interaction))) return;
+      if (!(await isPlaying(queue, interaction))) return;
 
       const clearembed = createClearEmbed(interaction);
 

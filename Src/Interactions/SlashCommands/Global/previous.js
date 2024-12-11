@@ -1,20 +1,20 @@
-const { 
+const {
   validation: { validateVoiceChannel, isPlaying },
   player: { player },
   embeds: { createPreviousEmbed },
-} = require('../../../Structures/music');
+} = require("../../../Structures/music");
 
 module.exports = {
-  name: 'previous',
+  name: "previous",
   type: 1,
-  description: 'Plays previous track.',
+  description: "Plays previous track.",
   guildCooldown: 1000,
   run: async (client, interaction) => {
     try {
       await interaction.deferReply();
       const queue = player.nodes.get(interaction.guild.id);
-      if (!await validateVoiceChannel(interaction)) return;
-      if (!await isPlaying(queue, interaction)) return;
+      if (!(await validateVoiceChannel(interaction))) return;
+      if (!(await isPlaying(queue, interaction))) return;
 
       const previousTracks = queue.history.tracks.toArray();
       if (!previousTracks[0])

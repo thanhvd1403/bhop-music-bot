@@ -1,4 +1,4 @@
-const commandOptionsProcessor = require('../Structures/CommandOptions/Processor');
+const commandOptionsProcessor = require("../Structures/CommandOptions/Processor");
 
 async function handleInteraction(interaction, client) {
   const slashCommand = client.slashCommands.get(interaction.commandName);
@@ -8,7 +8,7 @@ async function handleInteraction(interaction, client) {
       const choices = [];
       await slashCommand.autocomplete(interaction, choices);
     } catch (error) {
-      console.error('Autocomplete error:', error);
+      console.error("Autocomplete error:", error);
       return;
     }
   }
@@ -19,32 +19,39 @@ async function handleInteraction(interaction, client) {
   }
 
   if (interaction.isAnySelectMenu()) {
-    const selectMenuCommand = client.selectMenus.get(interaction.values[0]) ?? client.selectMenus.get(interaction.customId);
+    const selectMenuCommand =
+      client.selectMenus.get(interaction.values[0]) ??
+      client.selectMenus.get(interaction.customId);
     if (!selectMenuCommand) return;
-    return handleCommand(interaction, client, selectMenuCommand, 'SelectMenu');
+    return handleCommand(interaction, client, selectMenuCommand, "SelectMenu");
   }
 
   if (interaction.isButton()) {
     const buttonInteraction = client.buttonCommands.get(interaction.customId);
     if (!buttonInteraction) return;
-    return handleCommand(interaction, client, buttonInteraction, 'Button');
+    return handleCommand(interaction, client, buttonInteraction, "Button");
   }
 
   if (interaction.isModalSubmit()) {
     const modalInteraction = client.modalForms.get(interaction.customId);
     if (!modalInteraction) return;
-    return handleCommand(interaction, client, modalInteraction, 'ModalForm');
+    return handleCommand(interaction, client, modalInteraction, "ModalForm");
   }
 }
 
-async function handleCommand(interaction, client, command, type = 'SlashCommand') {
+async function handleCommand(
+  interaction,
+  client,
+  command,
+  type = "SlashCommand"
+) {
   try {
     const authenticatedCMDOptions = await commandOptionsProcessor(
       client,
       interaction,
       command,
       true,
-      type,
+      type
     );
 
     if (authenticatedCMDOptions) {
@@ -56,6 +63,6 @@ async function handleCommand(interaction, client, command, type = 'SlashCommand'
 }
 
 module.exports = {
-  name: 'interactionCreate',
+  name: "interactionCreate",
   run: handleInteraction,
 };

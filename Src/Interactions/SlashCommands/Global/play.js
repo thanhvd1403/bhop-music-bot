@@ -1,36 +1,40 @@
-const { QueryType } = require('discord-player');
-const { 
+const { QueryType } = require("discord-player");
+const {
   validation: { validateVoiceChannel },
   player: { player, playTrack, buildSuccessMessage },
-  autocomplete: { handleAutocomplete }
-} = require('../../../Structures/music');
+  autocomplete: { handleAutocomplete },
+} = require("../../../Structures/music");
 
 module.exports = {
-  name: 'play',
+  name: "play",
   type: 1,
-  description: 'Plays and enqueues track(s) of the query provided.',
+  description: "Plays and enqueues track(s) of the query provided.",
   guildCooldown: 1000,
   options: [
     {
-      name: 'query',
-      description: 'Plays and enqueues track(s) of the query provided.',
+      name: "query",
+      description: "Plays and enqueues track(s) of the query provided.",
       type: 3,
       autocomplete: true,
       required: true,
     },
   ],
-  autocomplete: async interaction => {
+  autocomplete: async (interaction) => {
     const results = await handleAutocomplete(interaction);
     await interaction.respond(results);
   },
   run: async (client, interaction) => {
     try {
       await interaction.deferReply();
-      const query = interaction.options.getString('query', true);
-      
-      if (!await validateVoiceChannel(interaction)) return;
+      const query = interaction.options.getString("query", true);
 
-      const searchResult = await player.search(query, { requestedBy: interaction.user, searchEngine: QueryType.AUTO });
+      if (!(await validateVoiceChannel(interaction))) return;
+
+      const searchResult = await player.search(query, {
+        requestedBy: interaction.user,
+        searchEngine: QueryType.AUTO,
+      });
+
       if (!searchResult?.tracks?.length) {
         return interaction.followUp({
           content: `❌ | Couldn't find the song with the requested query.`,
@@ -44,7 +48,7 @@ module.exports = {
       return interaction.followUp({ content: message });
     } catch (error) {
       return interaction.followUp({
-        content: 'An error occurred while trying to play the track',
+        content: "An error occurred while trying to play the track",
         ephemeral: true,
       });
     }

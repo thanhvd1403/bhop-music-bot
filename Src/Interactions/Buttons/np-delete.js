@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'np-delete',
+  name: "np-delete",
   run: async (client, interaction) => {
     try {
       interaction.message.delete();
@@ -9,6 +9,6 @@ module.exports = {
         content: `❌ | Oops, something went wrong. Please try again.`,
         ephemeral: true,
       });
-    } 
+    }
   },
 };
